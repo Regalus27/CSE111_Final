@@ -1,0 +1,10 @@
+def init():
+    global WINDOW_WIDTH
+    WINDOW_WIDTH = 800
+    global WINDOW_HEIGHT
+    WINDOW_HEIGHT = 600
+
+    global BULLET_SPEED
+    BULLET_SPEED = 10
+    global BULLET_RADIUS
+    BULLET_RADIUS = 10

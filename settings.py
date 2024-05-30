@@ -8,3 +8,8 @@ def init():
     BULLET_SPEED = 10
     global BULLET_RADIUS
     BULLET_RADIUS = 10
+
+    global PLAYER_SPEED
+    PLAYER_SPEED = 8
+    global PLAYER_RADIUS
+    PLAYER_RADIUS = 25

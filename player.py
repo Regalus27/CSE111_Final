@@ -4,9 +4,6 @@ from position import Position
 import settings
 from unit import Unit
 
-RADIUS = 25
-SPEED = 5
-
 class Player(Unit):
     # Inherites Sprite
     def __init__(self):
@@ -19,8 +16,8 @@ class Player(Unit):
         # Save player rect into accessible variable
         self.rect = self.surf.get_rect()
         
-        self.radius = RADIUS
-        self.speed = SPEED
+        self.radius = settings.PLAYER_RADIUS
+        self.speed = settings.PLAYER_SPEED
         self.position = Position(0, 0)
 
     def fire(self):

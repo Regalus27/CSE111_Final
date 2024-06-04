@@ -1,0 +1,4 @@
+Song: Ludum Dare 30 - 09 by Abstraction (https://abstractionmusic.com/)
+Sound Effects: Purchased from Beep Yeah! (8-Bit Sound Effects)
+
+All other assets (graphics and code) were made by me.

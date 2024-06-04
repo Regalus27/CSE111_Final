@@ -27,3 +27,5 @@ def init():
     WINDOW_HEIGHT = 800
     global WINDOW_FPS
     WINDOW_FPS = 60
+    global WINDOW_VOLUME
+    WINDOW_VOLUME = .5

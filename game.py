@@ -17,6 +17,16 @@ def main():
     # Initialize window
     screen = pygame.display.set_mode(size=[WIDTH, HEIGHT])
 
+    # Initialize music and sounds
+    music_filename = "Assets\Ludum Dare 30 - 09.ogg"
+    pygame.mixer.music.load(music_filename)
+    pygame.mixer.music.set_volume(settings.WINDOW_VOLUME)
+    pygame.mixer.music.play(fade_ms=500)
+
+    fire_sound_filename = "Assets\gun-2.wav"
+    fire_sound = pygame.mixer.Sound(fire_sound_filename)
+    fire_sound.set_volume(settings.WINDOW_VOLUME)
+
     # Clock for frame rate
     clock = pygame.time.Clock()
 
@@ -48,6 +58,7 @@ def main():
         added_bullets = handle_input(player)
         for bullet in added_bullets:
             unit_list.append(bullet)
+            fire_sound.play()
 
         unit_list = handle_units(unit_list)
 
@@ -116,6 +127,11 @@ def handle_input(player : Player):
     return added_bullets
 
 def handle_units(unit_list):
+    # Setup explode sound (Would be more efficient to set up as a global)
+    explode_sound_filename = "Assets\explode-3.wav"
+    explode_sound = pygame.mixer.Sound(explode_sound_filename)
+    explode_sound.set_volume(settings.WINDOW_VOLUME)
+
     new_unit_list = []
     if len(unit_list) > 0:
         for unit in unit_list:
@@ -132,6 +148,8 @@ def handle_units(unit_list):
                     if unit.check_collision(bullet):
                         unit.die()
                         bullet.die()
+                        explode_sound.play()
+                        
             if unit.get_alive():
                 bullet_list = unit.update()
                 new_unit_list.append(unit)

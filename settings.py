@@ -28,4 +28,6 @@ def init():
     global WINDOW_FPS
     WINDOW_FPS = 60
     global WINDOW_VOLUME
-    WINDOW_VOLUME = .5
+    WINDOW_VOLUME = .1
+    global WINDOW_WIN_SCORE
+    WINDOW_WIN_SCORE = 5

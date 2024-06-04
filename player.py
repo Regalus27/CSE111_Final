@@ -23,10 +23,19 @@ class Player(Unit):
         self.shoot_cooldown = 0
         self.SHOOT_COOLDOWN_MAX = settings.PLAYER_COOLDOWN # frames between shots
 
+        self.score = 0
+
     def fire(self):
         # Always fire up
         bullet_spawn_position = Position(self.get_position().get_x(), self.get_position().get_y() - self.get_radius() - settings.BULLET_RADIUS)
         return Bullet(bullet_spawn_position, -settings.BULLET_SPEED)
+    
+    def get_score(self):
+        return self.score
+    
+    def increment_score(self, amount = 1):
+        self.score += amount
+        return self.get_score()
 
     def update(self, target_position, fire_pressed=False):
         """

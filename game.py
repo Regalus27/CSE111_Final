@@ -44,7 +44,7 @@ def main():
         render_screen(screen, player, unit_list, score)
 
         # max frames per second: 60
-        clock.tick(60)
+        clock.tick(settings.WINDOW_FPS)
 
 def handle_input(player : Player):
     """

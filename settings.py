@@ -3,6 +3,8 @@ def init():
     WINDOW_WIDTH = 800
     global WINDOW_HEIGHT
     WINDOW_HEIGHT = 600
+    global WINDOW_FPS
+    WINDOW_FPS = 60
 
     global BULLET_SPEED
     BULLET_SPEED = 6

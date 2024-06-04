@@ -43,10 +43,10 @@ def main():
 
         render_screen(screen, player, unit_list, score)
 
-        # max frames per second: 30
-        clock.tick(30)
+        # max frames per second: 60
+        clock.tick(60)
 
-def handle_input(player):
+def handle_input(player : Player):
     """
     Input handling:
     A, Left Arrow
@@ -54,11 +54,6 @@ def handle_input(player):
     D, Right Arrow
         player_delta_x = player_speed
         Need to check if speed is negative (other button held down), set to zero if true instead of positive
-    
-    Firing clock
-        Some way to disable shooting for 500 milliseconds after firing
-        pygame.time.set_timer(event, delay, loops)
-
 
     Parameters:
         player: player to be controlled

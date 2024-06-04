@@ -5,11 +5,13 @@ def init():
     WINDOW_HEIGHT = 600
 
     global BULLET_SPEED
-    BULLET_SPEED = 10
+    BULLET_SPEED = 6
     global BULLET_RADIUS
     BULLET_RADIUS = 10
 
     global PLAYER_SPEED
-    PLAYER_SPEED = 8
+    PLAYER_SPEED = 4
     global PLAYER_RADIUS
     PLAYER_RADIUS = 25
+    global PLAYER_COOLDOWN
+    PLAYER_COOLDOWN = 40

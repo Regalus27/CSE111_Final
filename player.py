@@ -20,6 +20,9 @@ class Player(Unit):
         self.speed = settings.PLAYER_SPEED
         self.position = Position(0, 0)
 
+        self.shoot_cooldown = 0
+        self.SHOOT_COOLDOWN_MAX = settings.PLAYER_COOLDOWN # frames between shots
+
     def fire(self):
         # Always fire up
         bullet_spawn_position = Position(self.get_position().get_x(), self.get_position().get_y() - self.get_radius() - settings.BULLET_RADIUS)
@@ -35,8 +38,14 @@ class Player(Unit):
         self.move(target_position)
 
         bullets = []
-        if fire_pressed:
+        
+        if self.shoot_cooldown > 0:
+            self.shoot_cooldown -= 1
+            # While I could eliminate one check by letting shoot cooldown tick infinitely, shoot_cooldown doesn't need to keep going below 0
+
+        if fire_pressed and self.shoot_cooldown <= 0:
             bullets.append(self.fire())
+            self.shoot_cooldown = self.SHOOT_COOLDOWN_MAX # Reset cooldown
         return bullets
 
 

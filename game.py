@@ -1,3 +1,4 @@
+from enemy import Enemy
 from player import Player
 from position import Position
 import pygame
@@ -22,8 +23,6 @@ def main():
     player = Player()
     player.update(Position(WIDTH / 2, HEIGHT - 40))
 
-    # Initialize score
-    score = 0
     unit_list = []
 
     # Game loop
@@ -34,6 +33,16 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
+        # Spawn new enemies if necessary
+        enemy_count = 0
+        for unit in unit_list:
+            if isinstance(unit, Enemy):
+                enemy_count += 1
+        if enemy_count < settings.ENEMY_MAX_COUNT:
+            # Initialize an enemy and add it to unit_list
+            enemy = Enemy()
+            unit_list.append(enemy)
+
         # Inputs handled here
         added_bullets = handle_input(player)
         for bullet in added_bullets:
@@ -41,7 +50,7 @@ def main():
 
         unit_list = handle_units(unit_list)
 
-        render_screen(screen, player, unit_list, score)
+        render_screen(screen, player, unit_list)
 
         # max frames per second: 60
         clock.tick(settings.WINDOW_FPS)
@@ -109,23 +118,24 @@ def handle_units(unit_list):
     if len(unit_list) > 0:
         for unit in unit_list:
             if unit.get_alive():
-                unit.update()
+                bullet_list = unit.update()
                 new_unit_list.append(unit)
+                # Handle spawned bullets next frame
+                for bullet in bullet_list:
+                    new_unit_list.append(bullet)
     return new_unit_list
 
-def render_screen(screen, player, unit_list, score):
+def render_screen(screen, player, unit_list):
     # Render to screen
     # Background
     screen.fill((255, 255, 255))
     # Player
-    screen.blit(player.surf, (player.get_position().get_x() - 40, player.get_position().get_y() - 40))
+    screen.blit(player.surf, (player.get_position().get_x() - 40,
+                               player.get_position().get_y() - 40))
     # Units
     for unit in unit_list:
-        screen.blit(unit.surf, (unit.get_position().get_x() - unit.get_radius(), unit.get_position().get_y() - unit.get_radius()))
-    # Score
-    score_font = pygame.font.SysFont("any_font", 30)
-    score_block = score_font.render(f"Score: {score}", False, (0, 0, 0))
-    screen.blit(score_block, (25,25))
+        screen.blit(unit.surf, (unit.get_position().get_x() - unit.get_radius(),
+                                 unit.get_position().get_y() - unit.get_radius()))
 
     # Reveal
     pygame.display.flip()

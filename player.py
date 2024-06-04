@@ -1,6 +1,6 @@
 from bullet import Bullet
-import pygame
 from position import Position
+import pygame
 import settings
 from unit import Unit
 

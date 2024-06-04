@@ -35,6 +35,7 @@ def main():
     player.update(Position(WIDTH / 2, HEIGHT - 40))
 
     unit_list = []
+    score = 0
 
     # Game loop
     running = True
@@ -149,6 +150,13 @@ def handle_units(unit_list):
                         unit.die()
                         bullet.die()
                         explode_sound.play()
+                        # Update score
+                        if isinstance(unit, Enemy):
+                            # increment score
+                            pass
+                        elif isinstance(unit, Player):
+                            # you lose screen
+                            pass
                         
             if unit.get_alive():
                 bullet_list = unit.update()
@@ -156,8 +164,6 @@ def handle_units(unit_list):
                 # Handle spawned bullets next frame
                 for bullet in bullet_list:
                     new_unit_list.append(bullet)
-                
-
     return new_unit_list
 
 def render_screen(screen, player, unit_list):

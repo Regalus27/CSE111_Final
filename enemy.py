@@ -39,11 +39,8 @@ class Enemy(Unit):
 
     def update(self):
         """
-        Autonomous movement and firing
+        Autonomous firing
         """
-        # Movement logic
-        # test firing first
-
         # Firing logic (LAST, includes a return statement)
         bullets = []
         if self.shoot_cooldown > 0:

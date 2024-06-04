@@ -11,7 +11,7 @@ def init():
     global ENEMY_RADIUS
     ENEMY_RADIUS = 30
     global ENEMY_SPEED
-    ENEMY_SPEED = 2
+    ENEMY_SPEED = 1
   
 
     global PLAYER_COOLDOWN

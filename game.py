@@ -1,3 +1,4 @@
+from bullet import Bullet
 from enemy import Enemy
 from player import Player
 from position import Position
@@ -110,19 +111,35 @@ def handle_input(player : Player):
     if new_player_y < 0:
         new_player_y = 0
 
-    added_bullets = player.update(Position(new_player_x, new_player_y), fire_pressed=fire)
+    added_bullets = player.update(Position(new_player_x, new_player_y),
+                                   fire_pressed=fire)
     return added_bullets
 
 def handle_units(unit_list):
     new_unit_list = []
     if len(unit_list) > 0:
         for unit in unit_list:
+            """
+            Collisions:
+                if this is a player or enemy
+                create a temporary list of only bullets
+                if colliding with a bullet
+                kill bullet and player/enemy
+            """
+            if isinstance(unit, Enemy) or isinstance(unit, Player):
+                tmp_bullet_list = filter(lambda a : isinstance(a, Bullet), unit_list)
+                for bullet in tmp_bullet_list:
+                    if unit.check_collision(bullet):
+                        unit.die()
+                        bullet.die()
             if unit.get_alive():
                 bullet_list = unit.update()
                 new_unit_list.append(unit)
                 # Handle spawned bullets next frame
                 for bullet in bullet_list:
                     new_unit_list.append(bullet)
+                
+
     return new_unit_list
 
 def render_screen(screen, player, unit_list):
